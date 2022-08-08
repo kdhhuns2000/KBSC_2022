@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'donation_info.dart';
 
 void main() {
   runApp(const MyApp());
@@ -77,7 +78,8 @@ class _ExploreState extends State<Explore> {
                             context,
                             MaterialPageRoute(
                             builder: (context) => DonationInfoScreen(),
-                        ),
+                            ),
+                        );
                       },
                       child: const Text('정보'),
                     ),
