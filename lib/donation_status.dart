@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'design_course_app_theme.dart';
 
-class DonationInfoScreen extends StatefulWidget {
+
+class CourseInfoScreen extends StatefulWidget {
   @override
-  _DonationInfoScreen createState() => _DonationInfoScreen();
+  _CourseInfoScreenState createState() => _CourseInfoScreenState();
 }
-
-
-class _DonationInfoScreen extends State<DonationInfoScreen>
+class _CourseInfoScreenState extends State<CourseInfoScreen>
     with TickerProviderStateMixin {
-  bool iconColor = true;
   final double infoHeight = 364.0;
   AnimationController? animationController;
   Animation<double>? animation;
   double opacity1 = 0.0;
   double opacity2 = 0.0;
   double opacity3 = 0.0;
+
   @override
   void initState() {
     animationController = AnimationController(
@@ -57,8 +56,8 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
             Column(
               children: <Widget>[
                 AspectRatio(
-                  aspectRatio: 1.2 ,
-                  child: Image.asset('images/yuri.png', fit: BoxFit.cover),
+                  aspectRatio: 1.2,
+                  child: Image.asset('images/chaewon.jpg', fit: BoxFit.cover),
                 ),
               ],
             ),
@@ -97,7 +96,7 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                             padding: const EdgeInsets.only(
                                 top: 32.0, left: 18, right: 16),
                             child: Text(
-                              '말레이시아\n기부 받아요',
+                              '김채원',
                               textAlign: TextAlign.left,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
@@ -128,7 +127,7 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                                   child: Row(
                                     children: <Widget>[
                                       Text(
-                                        '4.3', //평점쓰는곳
+                                        '4.3',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontWeight: FontWeight.w200,
@@ -151,7 +150,6 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                           AnimatedOpacity(
                             duration: const Duration(milliseconds: 500),
                             opacity: opacity1,
-                            /*
                             child: Padding(
                               padding: const EdgeInsets.all(8),
                               child: Row(
@@ -162,7 +160,6 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                                 ],
                               ),
                             ),
-                            */
                           ),
                           Expanded(
                             child: AnimatedOpacity(
@@ -172,7 +169,7 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                                 padding: const EdgeInsets.only(
                                     left: 16, right: 16, top: 8, bottom: 8),
                                 child: Text(
-                                  '배고픈 아이들에게 밥을 주세요',
+                                  '르세라핌',
                                   textAlign: TextAlign.justify,
                                   style: TextStyle(
                                     fontWeight: FontWeight.w200,
@@ -280,9 +277,12 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                   child: Container(
                     width: 60,
                     height: 60,
-
                     child: Center(
-                      child: IconColorChanger(),
+                      child: Icon(
+                        Icons.favorite,
+                        color: DesignCourseAppTheme.nearlyWhite,
+                        size: 30,
+                      ),
                     ),
                   ),
                 ),
@@ -360,41 +360,6 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
           ),
         ),
       ),
-    );
-  }
-
-  void _heartPressed() {
-    if(iconColor){
-      iconColor = false;
-    }
-    else if (!iconColor){
-      iconColor = true;
-    }
-  }
-}
-
-class IconColorChanger extends StatefulWidget {
-  const IconColorChanger({Key? key}) : super(key: key);
-
-  @override
-  State<IconColorChanger> createState() => _IconColorChangerState();
-}
-
-class _IconColorChangerState extends State<IconColorChanger> {
-  bool iconColor = true;
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed:() {
-        setState(() {
-          if(iconColor) iconColor = false;
-          else iconColor = true;
-        });
-      },
-      icon: Icon(Icons.favorite), //하트표시
-
-      color : iconColor ? DesignCourseAppTheme.nearlyWhite: DesignCourseAppTheme.nearlyBlack,
-
     );
   }
 }

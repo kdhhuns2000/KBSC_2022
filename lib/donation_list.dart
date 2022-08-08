@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'donation_info.dart';
+import 'donation_status.dart';
 
 class Donation_list extends StatelessWidget {
   const Donation_list({Key? key}) : super(key: key);
@@ -70,6 +71,12 @@ class _ExploreState extends State<Explore> {
                     FlatButton(
                       textColor: const Color(0xFF6200EE),
                       onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DonationInfoScreen(),
+                          ),
+                        );
                         // Perform some action
                       },
                       child: const Text('정보'),
@@ -119,7 +126,7 @@ class _ExploreState extends State<Explore> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DonationInfoScreen(),
+                            builder: (context) => CourseInfoScreen(),
                           ),
                         );
                       },
