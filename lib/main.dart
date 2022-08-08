@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'start_page.dart';
-import 'donation_list.dart';
 
 void main() {
   runApp(const MyApp());

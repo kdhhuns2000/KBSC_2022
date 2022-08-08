@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'donation_list.dart';
 
 class Start_page extends StatefulWidget {
   const Start_page({Key? key}) : super(key: key);
@@ -37,7 +38,7 @@ class _Start_pageState extends State<Start_page> {
         decoration: BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('start_bg_img.jpeg'),
+            image: AssetImage('images/start_bg_img.jpeg'),
           ),
         ),
         child: Scaffold(
@@ -153,7 +154,14 @@ class _LogInWidgetState extends State<LogInWidget> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Donation_list(),
+                    ),
+                  );
+                },
                 child: Text('Login', style: TextStyle(color: Colors.white)),
               ),
             ),
