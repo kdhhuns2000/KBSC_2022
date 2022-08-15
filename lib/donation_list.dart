@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'donation_info.dart';
 import 'donation_status.dart';
 
-class Donation_list extends StatelessWidget {
-  const Donation_list({Key? key}) : super(key: key);
+class DonationList extends StatelessWidget {
+  const DonationList({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -14,138 +14,6 @@ class Donation_list extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Explore(title: 'Explore'),
-    );
-  }
-}
-
-class Explore extends StatefulWidget {
-  const Explore({Key? key, required this.title}) : super(key: key);
-  final String title;
-
-  @override
-  State<Explore> createState() => _ExploreState();
-}
-
-class _ExploreState extends State<Explore> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: ExploreAppBar(widget: widget),
-      body: Column(
-        children: [
-          const Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(),
-                contentPadding: EdgeInsets.all(10.0),
-                hintText: '검색...',
-              ),
-            ),
-          ),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                Image.network(
-                    'https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
-                ListTile(
-                  leading: Icon(Icons.arrow_drop_down_circle),
-                  title: const Text('세이브 더 칠드런'),
-                  subtitle: Text(
-                    '홍길동',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    '이 친구 소개.',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                ButtonBar(
-                  alignment: MainAxisAlignment.end,
-                  children: [
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DonationInfoScreen(),
-                          ),
-                        );
-                        // Perform some action
-                      },
-                      child: const Text('정보'),
-                    ),
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: const Text('기부'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20.0,
-          ),
-          Card(
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-              children: [
-                Image.network(
-                    'https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
-                ListTile(
-                  leading: Icon(Icons.arrow_drop_down_circle),
-                  title: const Text('세이브 더 칠드런'),
-                  subtitle: Text(
-                    '홍길동',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Text(
-                    '이 친구 소개.',
-                    style: TextStyle(color: Colors.black.withOpacity(0.6)),
-                  ),
-                ),
-                ButtonBar(
-                  alignment: MainAxisAlignment.end,
-                  children: [
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CourseInfoScreen(),
-                          ),
-                        );
-                      },
-                      child: const Text('정보'),
-                    ),
-                    FlatButton(
-                      textColor: const Color(0xFF6200EE),
-                      onPressed: () {
-                        // Perform some action
-                      },
-                      child: const Text('기부'),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
@@ -201,6 +69,123 @@ class ExploreAppBar extends StatelessWidget implements PreferredSizeWidget {
                 color: Colors.black54,
                 iconSize: 30.0,
                 onPressed: () {},
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Explore extends StatefulWidget {
+  const Explore({Key? key, required this.title}) : super(key: key);
+  final String title;
+
+  @override
+  State<Explore> createState() => _ExploreState();
+}
+
+class _ExploreState extends State<Explore> {
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: ExploreAppBar(widget: widget),
+      body: Column(
+        children: [
+          const Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+                contentPadding: EdgeInsets.all(10.0),
+                hintText: '검색...',
+              ),
+            ),
+          ),
+          Expanded(
+            child: Scrollbar(
+              thumbVisibility: true,
+              controller: _scrollController,
+              child: ListView.builder(
+                controller: _scrollController,
+                itemCount: 100,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DonationItemCard(),
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DonationItemCard extends StatelessWidget {
+  const DonationItemCard({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        children: [
+          Image.network(
+              'https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
+          ListTile(
+            leading: const Icon(Icons.arrow_drop_down_circle),
+            title: const Text('세이브 더 칠드런'),
+            subtitle: Text(
+              '홍길동',
+              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              '이 친구 소개.',
+              style: TextStyle(color: Colors.black.withOpacity(0.6)),
+            ),
+          ),
+          ButtonBar(
+            alignment: MainAxisAlignment.end,
+            children: [
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(
+                    color: Color(0xFF6200EE),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => DonationInfoScreen(),
+                    ),
+                  );
+                  // Perform some action
+                },
+                child: const Text('정보'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  textStyle: const TextStyle(
+                    color: Color(0xFF6200EE),
+                  ),
+                ),
+                onPressed: () {
+                  // Perform some action
+                },
+                child: const Text('기부'),
               ),
             ],
           ),
