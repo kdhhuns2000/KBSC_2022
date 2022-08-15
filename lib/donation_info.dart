@@ -58,7 +58,7 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
               children: <Widget>[
                 AspectRatio(
                   aspectRatio: 1.2 ,
-                  child: Image.asset('images/yuri.png', fit: BoxFit.cover),
+                  child: Image.asset('assets/images/yuri.png', fit: BoxFit.cover),
                 ),
               ],
             ),

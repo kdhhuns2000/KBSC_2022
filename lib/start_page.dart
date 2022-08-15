@@ -33,12 +33,10 @@ class _Start_pageState extends State<Start_page> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             fit: BoxFit.cover,
-            image: AssetImage('images/start_bg_img.jpeg'),
+            image: AssetImage('assets/images/start_bg_img.jpeg'),
           ),
         ),
         child: Scaffold(
