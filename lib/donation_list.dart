@@ -18,66 +18,6 @@ class DonationList extends StatelessWidget {
   }
 }
 
-class ExploreAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const ExploreAppBar({
-    Key? key,
-    required this.widget,
-  }) : super(key: key);
-
-  final Explore widget;
-
-  @override
-  Size get preferredSize => const Size.fromHeight(70.0);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      toolbarHeight: 70.0,
-      backgroundColor: Colors.white,
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.arrow_back),
-                color: Colors.black54,
-                iconSize: 40.0,
-                onPressed: () {},
-              ),
-              const SizedBox(
-                width: 30.0,
-              ),
-            ],
-          ),
-          Text(
-            widget.title,
-            style: const TextStyle(
-              color: Colors.black,
-            ),
-          ),
-          Row(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.favorite_outline),
-                color: Colors.black54,
-                iconSize: 30.0,
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.location_on_sharp),
-                color: Colors.black54,
-                iconSize: 30.0,
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
 class Explore extends StatefulWidget {
   const Explore({Key? key, required this.title}) : super(key: key);
   final String title;
@@ -89,10 +29,59 @@ class Explore extends StatefulWidget {
 class _ExploreState extends State<Explore> {
   final ScrollController _scrollController = ScrollController();
 
+  bool favoriteActivate = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ExploreAppBar(widget: widget),
+      appBar: AppBar(
+        toolbarHeight: 70.0,
+        backgroundColor: Colors.white,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  color: Colors.black54,
+                  iconSize: 40.0,
+                  onPressed: () {},
+                ),
+                const SizedBox(
+                  width: 30.0,
+                ),
+              ],
+            ),
+            Text(
+              widget.title,
+              style: const TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: (favoriteActivate == false)
+                      ? const Icon(Icons.favorite_outline)
+                      : const Icon(Icons.favorite_outlined),
+                  color: Colors.black54,
+                  iconSize: 30.0,
+                  onPressed: () => setState(() {
+                    favoriteActivate = !favoriteActivate;
+                  }),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.location_on_sharp),
+                  color: Colors.black54,
+                  iconSize: 30.0,
+                  onPressed: () {},
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       body: Column(
         children: [
           const Padding(
@@ -112,11 +101,11 @@ class _ExploreState extends State<Explore> {
               controller: _scrollController,
               child: ListView.builder(
                 controller: _scrollController,
-                itemCount: 100,
+                itemCount: 10,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: DonationItemCard(),
+                    child: DonationItemCard(index: index),
                   );
                 },
               ),
@@ -129,9 +118,13 @@ class _ExploreState extends State<Explore> {
 }
 
 class DonationItemCard extends StatelessWidget {
-  const DonationItemCard({
+  DonationItemCard({
     Key? key,
+    required this.index,
   }) : super(key: key);
+
+  bool isFavorite = false;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
@@ -143,7 +136,7 @@ class DonationItemCard extends StatelessWidget {
               'https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
           ListTile(
             leading: const Icon(Icons.arrow_drop_down_circle),
-            title: const Text('세이브 더 칠드런'),
+            title: Text('세이브 더 칠드런$index'),
             subtitle: Text(
               '홍길동',
               style: TextStyle(color: Colors.black.withOpacity(0.6)),
