@@ -12,20 +12,21 @@ class Start_page extends StatefulWidget {
 class _Start_pageState extends State<Start_page> {
   bool SignUpState = false;
 
-  void changeSignUp(){
+  void changeSignUp() {
     setState(() {
-      if (SignUpState == false) SignUpState = true;
+      if (SignUpState == false)
+        SignUpState = true;
       else if (SignUpState == true) SignUpState = false;
-    }
-    );
+    });
   }
 
   bool LogInState = false;
 
-  void changeState(){
+  void changeState() {
     setState(() {
-      if(LogInState == false) LogInState = true;
-      else if(LogInState == true) LogInState = false;
+      if (LogInState == false)
+        LogInState = true;
+      else if (LogInState == true) LogInState = false;
     });
   }
 
@@ -40,8 +41,12 @@ class _Start_pageState extends State<Start_page> {
           ),
         ),
         child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: LogInState ? SignUpState ? SignUpWidget(changeFunction: changeSignUp) : LogInWidget(changeFunction: changeSignUp) : StartWidget(changeFunction: changeState)
+          backgroundColor: Colors.transparent,
+          body: LogInState
+              ? SignUpState
+                  ? SignUpWidget(changeFunction: changeSignUp)
+                  : LogInWidget(changeFunction: changeSignUp)
+              : StartWidget(changeFunction: changeState),
         ),
       ),
     );
@@ -64,28 +69,60 @@ class _StartWidgetState extends State<StartWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Flexible(child: Container(
-            child: Text('Find a new', style: GoogleFonts.lobster(textStyle: TextStyle( fontWeight: FontWeight.w400, color: Colors.white, fontSize: 40, ))),
-          ), flex: 5),
-          Flexible(child: Container(
-            child: Text('Friend', style: GoogleFonts.lobster(textStyle: TextStyle( fontWeight: FontWeight.w400, color: Colors.white, fontSize: 30, ))),
-          ), flex: 5),
-          Flexible(child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(0, 40, 30, 0),
-                padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                decoration: BoxDecoration(
-                  color: Colors.blueAccent,
-                  borderRadius: BorderRadius.circular(8),
+          Flexible(
+            flex: 5,
+            child: Container(
+              child: Text(
+                'Find a new',
+                style: GoogleFonts.lobster(
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                    fontSize: 40,
+                  ),
                 ),
-                child: TextButton(
-                    onPressed: widget.changeFunction,
-                    child: Text('Log In', style: TextStyle( fontWeight: FontWeight.w700, color: Colors.white))),
               ),
-            ],
-          ), flex: 5),
+            ),
+          ),
+          Flexible(
+            flex: 5,
+            child: Container(
+              child: Text(
+                'Friend',
+                style: GoogleFonts.lobster(
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                    fontSize: 30,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 5,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.fromLTRB(0, 40, 30, 0),
+                  padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: TextButton(
+                    onPressed: widget.changeFunction,
+                    child: Text(
+                      'Log In',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
@@ -100,7 +137,6 @@ class LogInWidget extends StatefulWidget {
 }
 
 class _LogInWidgetState extends State<LogInWidget> {
-
   final Id = TextEditingController();
   final Password = TextEditingController();
 
@@ -112,7 +148,12 @@ class _LogInWidgetState extends State<LogInWidget> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text('LogIn', style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30))),
+            Text('LogIn',
+                style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                        fontSize: 30))),
             Container(
               margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: TextField(
@@ -124,7 +165,10 @@ class _LogInWidgetState extends State<LogInWidget> {
                   ),
                   labelText: 'ID',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                      fontWeight: FontWeight.w500, color: Colors.blueAccent),
+                ),
                 controller: Id,
               ),
             ),
@@ -140,7 +184,10 @@ class _LogInWidgetState extends State<LogInWidget> {
                   ),
                   labelText: 'Password',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                  textStyle: TextStyle(
+                      fontWeight: FontWeight.w500, color: Colors.blueAccent),
+                ),
                 controller: Password,
               ),
             ),
@@ -152,11 +199,11 @@ class _LogInWidgetState extends State<LogInWidget> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
-                onPressed: (){
+                onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Donation_list(),
+                      builder: (context) => DonationList(),
                     ),
                   );
                 },
@@ -166,10 +213,19 @@ class _LogInWidgetState extends State<LogInWidget> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Text("Don't have an account?", style: TextStyle(color: Colors.white)),
+                Text("Don't have an account?",
+                    style: TextStyle(color: Colors.white)),
                 TextButton(
                   onPressed: widget.changeFunction,
-                  child: Text('sign up', style: GoogleFonts.acme(textStyle: TextStyle( fontWeight: FontWeight.w300, color: Colors.blueAccent, ))),
+                  child: Text(
+                    'sign up',
+                    style: GoogleFonts.acme(
+                      textStyle: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
                 )
               ],
             ),
@@ -181,7 +237,8 @@ class _LogInWidgetState extends State<LogInWidget> {
 }
 
 class SignUpWidget extends StatefulWidget {
-  const SignUpWidget({Key? key, required this.changeFunction}) : super(key: key);
+  const SignUpWidget({Key? key, required this.changeFunction})
+      : super(key: key);
   final Function() changeFunction;
   @override
   State<SignUpWidget> createState() => _SignUpWidgetState();
@@ -211,7 +268,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 ),
               ],
             ),
-            Text('Sign Up', style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w700, color: Colors.white, fontSize: 30))),
+            Text(
+              'Sign Up',
+              style: GoogleFonts.roboto(
+                textStyle: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                    fontSize: 30),
+              ),
+            ),
             Container(
               margin: EdgeInsets.fromLTRB(25, 10, 25, 10),
               child: TextField(
@@ -223,7 +288,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   ),
                   labelText: 'ID',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.blueAccent)),
                 controller: SignUpId,
               ),
             ),
@@ -239,7 +306,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   ),
                   labelText: 'Password',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.blueAccent)),
                 controller: SignUpPassword,
               ),
             ),
@@ -254,7 +323,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   ),
                   labelText: 'Name',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.blueAccent)),
                 controller: SignUpName,
               ),
             ),
@@ -269,7 +340,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                   ),
                   labelText: 'Phone Number',
                 ),
-                style: GoogleFonts.roboto(textStyle: TextStyle( fontWeight: FontWeight.w500, color: Colors.blueAccent)),
+                style: GoogleFonts.roboto(
+                    textStyle: TextStyle(
+                        fontWeight: FontWeight.w500, color: Colors.blueAccent)),
                 controller: SignUpPhoneNumber,
               ),
             ),
@@ -281,7 +354,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
-                onPressed: (){},
+                onPressed: () {},
                 child: Text('Sign Up', style: TextStyle(color: Colors.white)),
               ),
             ),
@@ -291,4 +364,3 @@ class _SignUpWidgetState extends State<SignUpWidget> {
     );
   }
 }
-
