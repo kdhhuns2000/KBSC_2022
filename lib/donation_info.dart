@@ -6,7 +6,6 @@ class DonationInfoScreen extends StatefulWidget {
   _DonationInfoScreen createState() => _DonationInfoScreen();
 }
 
-
 class _DonationInfoScreen extends State<DonationInfoScreen>
     with TickerProviderStateMixin {
   bool iconColor = true;
@@ -57,8 +56,9 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
             Column(
               children: <Widget>[
                 AspectRatio(
-                  aspectRatio: 1.2 ,
-                  child: Image.asset('assets/images/yuri.png', fit: BoxFit.cover),
+                  aspectRatio: 1.2,
+                  child:
+                      Image.asset('assets/images/yuri.png', fit: BoxFit.cover),
                 ),
               ],
             ),
@@ -280,7 +280,6 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                   child: Container(
                     width: 60,
                     height: 60,
-
                     child: Center(
                       child: IconColorChanger(),
                     ),
@@ -297,7 +296,7 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
                   color: Colors.transparent,
                   child: InkWell(
                     borderRadius:
-                    BorderRadius.circular(AppBar().preferredSize.height),
+                        BorderRadius.circular(AppBar().preferredSize.height),
                     child: Icon(
                       Icons.arrow_back_ios,
                       color: DesignCourseAppTheme.nearlyBlack,
@@ -364,10 +363,9 @@ class _DonationInfoScreen extends State<DonationInfoScreen>
   }
 
   void _heartPressed() {
-    if(iconColor){
+    if (iconColor) {
       iconColor = false;
-    }
-    else if (!iconColor){
+    } else if (!iconColor) {
       iconColor = true;
     }
   }
@@ -385,16 +383,19 @@ class _IconColorChangerState extends State<IconColorChanger> {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      onPressed:() {
+      onPressed: () {
         setState(() {
-          if(iconColor) iconColor = false;
-          else iconColor = true;
+          if (iconColor)
+            iconColor = false;
+          else
+            iconColor = true;
         });
       },
       icon: Icon(Icons.favorite), //하트표시
 
-      color : iconColor ? DesignCourseAppTheme.nearlyWhite: DesignCourseAppTheme.nearlyBlack,
-
+      color: iconColor
+          ? DesignCourseAppTheme.nearlyWhite
+          : DesignCourseAppTheme.nearlyBlack,
     );
   }
 }
