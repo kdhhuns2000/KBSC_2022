@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'donation_list.dart';
+import 'auth_management.dart';
 
 class Start_page extends StatefulWidget {
   const Start_page({Key? key}) : super(key: key);
@@ -199,13 +200,16 @@ class _LogInWidgetState extends State<LogInWidget> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => DonationList(),
-                    ),
-                  );
+                onPressed: () async {
+                  bool auth = await AuthManage().signIn(Id.text, Password.text);
+                  if (mounted && auth == true) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DonationList(),
+                      ),
+                    );
+                  }
                 },
                 child: Text('Login', style: TextStyle(color: Colors.white)),
               ),
