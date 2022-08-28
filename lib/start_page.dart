@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'donation_list.dart';
-import 'auth_management.dart';
+import 'user_manage_class/alert.dart';
+import 'user_manage_class/auth_management.dart';
 
 class Start_page extends StatefulWidget {
   const Start_page({Key? key}) : super(key: key);
@@ -249,10 +252,11 @@ class SignUpWidget extends StatefulWidget {
 }
 
 class _SignUpWidgetState extends State<SignUpWidget> {
-  final SignUpId = TextEditingController();
+  final SignUpEmail = TextEditingController();
   final SignUpPassword = TextEditingController();
   final SignUpName = TextEditingController();
   final SignUpPhoneNumber = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -290,12 +294,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     borderRadius: BorderRadius.circular(8),
                     borderSide: BorderSide(width: 2, color: Colors.blueAccent),
                   ),
-                  labelText: 'ID',
+                  labelText: 'Email',
                 ),
                 style: GoogleFonts.roboto(
                     textStyle: TextStyle(
                         fontWeight: FontWeight.w500, color: Colors.blueAccent)),
-                controller: SignUpId,
+                controller: SignUpEmail,
               ),
             ),
             Container(
@@ -358,7 +362,12 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 borderRadius: BorderRadius.circular(8),
               ),
               child: TextButton(
-                onPressed: () {},
+                onPressed: () async {
+                  bool auth = await SignUpManage().signIn(SignUpEmail.text, SignUpPassword.text, SignUpName.text, SignUpPhoneNumber.text, context);
+                  if (mounted && auth == true) {
+                    widget.changeFunction();
+                  }
+                },
                 child: Text('Sign Up', style: TextStyle(color: Colors.white)),
               ),
             ),
