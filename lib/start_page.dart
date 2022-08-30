@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'donation_list.dart';
+import 'main_page.dart';
 import 'user_manage_class/alert.dart';
 import 'user_manage_class/auth_management.dart';
 
@@ -48,8 +49,8 @@ class _Start_pageState extends State<Start_page> {
           backgroundColor: Colors.transparent,
           body: LogInState
               ? SignUpState
-                  ? SignUpWidget(changeFunction: changeSignUp)
-                  : LogInWidget(changeFunction: changeSignUp)
+              ? SignUpWidget(changeFunction: changeSignUp)
+              : LogInWidget(changeFunction: changeSignUp)
               : StartWidget(changeFunction: changeState),
         ),
       ),
@@ -209,7 +210,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DonationList(),
+                        builder: (context) => MainPageScreen(),
                       ),
                     );
                   }
