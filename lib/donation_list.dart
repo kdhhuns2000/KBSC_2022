@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+
 import 'donation_info.dart';
-import 'donation_status.dart';
 
 class DonationList extends StatelessWidget {
   const DonationList({Key? key}) : super(key: key);
@@ -8,13 +8,7 @@ class DonationList extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Domestic & Overseas',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const Explore(title: 'Explore'),
-    );
+    return const Explore(title: 'Explore');
   }
 }
 
@@ -35,57 +29,34 @@ class _ExploreState extends State<Explore> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 70.0,
-        backgroundColor: Colors.white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  color: Colors.black54,
-                  iconSize: 40.0,
-                  onPressed: () {},
-                ),
-                const SizedBox(
-                  width: 30.0,
-                ),
-              ],
-            ),
-            Text(
-              widget.title,
-              style: const TextStyle(
-                color: Colors.black,
-              ),
-            ),
-            Row(
-              children: [
-                IconButton(
-                  icon: (favoriteActivate == false)
-                      ? const Icon(Icons.favorite_outline)
-                      : const Icon(Icons.favorite_outlined),
-                  color: Colors.black54,
-                  iconSize: 30.0,
-                  onPressed: () => setState(() {
-                    favoriteActivate = !favoriteActivate;
-                  }),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.location_on_sharp),
-                  color: Colors.black54,
-                  iconSize: 30.0,
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ],
+        // backgroundColor: Colors.white,
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            color: Colors.black,
+          ),
         ),
+        actions: [
+          IconButton(
+            icon: (favoriteActivate == false) ? const Icon(Icons.favorite_outline) : const Icon(Icons.favorite_outlined),
+            color: Colors.black54,
+            iconSize: 30.0,
+            onPressed: () => setState(() {
+              favoriteActivate = !favoriteActivate;
+            }),
+          ),
+          IconButton(
+            icon: const Icon(Icons.location_on_sharp),
+            color: Colors.black54,
+            iconSize: 30.0,
+            onPressed: () {},
+          ),
+        ],
       ),
       body: Column(
         children: [
           const Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: EdgeInsets.all(16.0),
             child: TextField(
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.search),
@@ -118,12 +89,12 @@ class _ExploreState extends State<Explore> {
 }
 
 class DonationItemCard extends StatelessWidget {
-  DonationItemCard({
+  const DonationItemCard({
     Key? key,
     required this.index,
   }) : super(key: key);
 
-  bool isFavorite = false;
+  final bool isFavorite = false;
   final int index;
 
   @override
@@ -132,8 +103,7 @@ class DonationItemCard extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       child: Column(
         children: [
-          Image.network(
-              'https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
+          Image.network('https://www.sc.or.kr/webPub/0_sck2014/images/microsite/onechild/main_visual.jpg'),
           ListTile(
             leading: const Icon(Icons.arrow_drop_down_circle),
             title: Text('세이브 더 칠드런$index'),
